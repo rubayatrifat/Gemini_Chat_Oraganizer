@@ -1,0 +1,542 @@
+/* ── Gemini Chat Folders — content.css ── */
+@font-face {
+  font-family: 'Material Symbols Outlined';
+  src: url('fonts/material-symbols.woff2') format('woff2');
+  font-style: normal;
+}
+
+.gcf-material-icon {
+  font-family: 'Material Symbols Outlined' !important;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  user-select: none;
+  flex-shrink: 0;
+}
+ 
+/* ── Root panel ── */
+#gcf-root {
+  font-family: 'Google Sans', sans-serif;
+  font-size: 13px;
+  color: #e8eaed;
+  padding: 8px 0 4px;
+}
+ 
+/* ── Section title — exactly like "Notebooks" / "Recents" ── */
+.gcf-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 16px 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+ 
+.gcf-section-title {
+  margin-bottom: 5px;
+  display: block;
+  color: rgba(255,255,255,0.55);
+  margin-left: 14px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: 'Google Sans', sans-serif;
+  letter-spacing: 0;
+}
+ 
+.gcf-section-toggle {
+  font-family: 'Material Symbols Outlined' !important;
+  font-size: 18px;
+  color: #e8eaed;
+  transition: transform 0.2s;
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  user-select: none;
+}
+#gcf-root.gcf-section-collapsed .gcf-section-toggle {
+  transform: rotate(-90deg);
+}
+ 
+/* ── Collapsible content ── */
+.gcf-section-content {
+  overflow: hidden;
+  transition: max-height 0.2s cubic-bezier(0.2,0,0,1);
+  max-height: 2000px;
+}
+#gcf-root.gcf-section-collapsed .gcf-section-content {
+  max-height: 0;
+}
+ 
+/* ── New Folder button — exactly like "+ New notebook" ── */
+.gcf-new-folder-btn {
+  margin-left: 7px;
+  height: 32px;
+  border-radius: 100px;
+  width: 97%;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 16px;
+  background: none;
+  border: none;
+  color: #e8eaed;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.1s;
+  box-sizing: border-box;
+}
+.gcf-new-folder-btn:hover { background: rgba(255,255,255,0.08); }
+.gcf-new-folder-btn .gcf-material-icon { font-size: 20px; }
+ 
+/* ── Folder item ── */
+.gcf-folder-item { position: relative; }
+ 
+.gcf-folder-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 5px;
+  border-radius: 100px;
+  height: 32px;
+  width: 98%;
+  padding: 0 16px;
+  cursor: pointer;
+  transition: background 0.1s;
+  box-sizing: border-box;
+  user-select: none;
+  position: relative;
+}
+.gcf-folder-row:hover { background: rgba(255,255,255,0.08); }
+.gcf-folder-row.gcf-drop-over {
+  background: rgba(138, 180, 248, 0.15);
+  outline: 2px dashed #8ab4f8;
+  outline-offset: -2px;
+}
+ 
+/* Folder icon — colored Material Symbol */
+.gcf-folder-icon {
+  font-family: 'Material Symbols Outlined' !important;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 1;
+  font-variation-settings:'wght' 300, 'GRAD' 0, 'opsz' 24;
+  flex-shrink: 0;
+  user-select: none;
+}
+ 
+.gcf-folder-label {
+  flex: 1;
+  font-size: 13px;
+  color: #e8eaed;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: 'Google Sans', sans-serif;
+}
+ 
+/* Collapse arrow */
+.gcf-folder-arrow {
+  font-family: 'Material Symbols Outlined' !important;
+  font-size: 16px;
+  color: #9aa0a6;
+  transition: transform 0.2s;
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  user-select: none;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+.gcf-folder-item:not(.gcf-collapsed) .gcf-folder-arrow {
+  transform: rotate(0deg);
+}
+.gcf-folder-item.gcf-collapsed .gcf-folder-arrow {
+  transform: rotate(-90deg);
+}
+ 
+/* Hover actions */
+.gcf-folder-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  opacity: 0;
+  transition: opacity 0.15s;
+  flex-shrink: 0;
+  position: absolute;
+  right: 12px;
+}
+.gcf-folder-row:hover .gcf-folder-actions { opacity: 1; }
+.gcf-folder-row:hover .gcf-folder-arrow { opacity: 0; }
+ 
+.gcf-icon-btn {
+  background: none;
+  border: none;
+  color: #9aa0a6;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.1s, color 0.1s;
+  padding: 0;
+}
+.gcf-icon-btn:hover { background: rgba(255,255,255,0.1); color: #e8eaed; }
+.gcf-icon-btn .gcf-material-icon { font-size: 18px; }
+ 
+/* ── Folder chat list ── */
+.gcf-chat-list {
+  width: 90%;
+  margin-left: auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+/* Smooth collapse wrapper */
+.gcf-collapse-wrapper {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows 0.25s cubic-bezier(0.2, 0, 0, 1);
+  overflow: hidden;
+}
+.gcf-folder-item.gcf-collapsed .gcf-collapse-wrapper {
+  grid-template-rows: 0fr;
+}
+.gcf-folder-item.gcf-collapsed .gcf-add-chat-outer {
+  display: none;
+}
+.gcf-collapse-wrapper > * {
+  min-height: 0;
+  overflow: hidden;
+}
+ 
+.gcf-chat-list.gcf-drop-over {
+  background: rgba(138, 180, 248, 0.08);
+  outline: 2px dashed #8ab4f8;
+  outline-offset: -2px;
+  min-height: 36px;
+  border-radius: 4px;
+}
+ 
+.gcf-empty-folder {
+  font-size: 12px;
+  color: #5f6368;
+  padding: 4px 16px 4px 52px;
+  font-style: italic;
+}
+ 
+/* ── Chat chip ── */
+.gcf-chat-chip {
+  height: 32px;
+  width: 100%;
+  border-radius: 100px;
+  padding: 0 10px 0px 10px;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background 0.1s;
+  box-sizing: border-box;
+}
+.gcf-chat-chip:hover { background: rgba(255,255,255,0.08); }
+.gcf-chat-chip.gcf-dragging { opacity: 0.4; }
+ 
+.gcf-drag-handle {
+  font-family: 'Material Symbols Outlined' !important;
+  font-size: 16px;
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  cursor: grab;
+  color: #5f6368;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 0.1s;
+  user-select: none;
+}
+.gcf-chat-chip:hover .gcf-drag-handle { opacity: 1; }
+.gcf-drag-handle:active { cursor: grabbing; }
+ 
+.gcf-chat-chip-title {
+  flex: 1;
+  font-size: 14px;
+  color: #e8eaed;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: 'Google Sans', sans-serif;
+}
+.gcf-chat-chip-title:hover { color: #8ab4f8; }
+ 
+.gcf-chip-remove {
+  background: none;
+  border: none;
+  color: #9aa0a6;
+  cursor: pointer;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.1s;
+  padding: 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.gcf-chat-chip:hover .gcf-chip-remove { opacity: 1; }
+.gcf-chip-remove:hover { color: #f28b82; background: rgba(255,255,255,0.08); }
+ 
+/* ── Folder count badge ── */
+.gcf-folder-count {
+  font-size: 11px;
+  color: #9aa0a6;
+  background: rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 1px 7px;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 0.15s;
+  font-family: 'Google Sans', sans-serif;
+}
+.gcf-folder-item.gcf-collapsed .gcf-folder-count {
+  opacity: 1;
+}
+.gcf-folder-row:hover .gcf-folder-count {
+    opacity: 0;
+}
+
+/* ── Add chat dropdown ── */
+.gcf-add-chat-wrap {
+  padding: 4px 8px 8px 8px;
+  position: relative;
+}
+
+.gcf-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 0 12px;
+  height: 32px;
+  border-radius: 100px;
+  background: none;
+  border: none;
+  color: #9aa0a6;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s;
+  text-align: left;
+  box-sizing: border-box;
+  margin-left: 22px;
+  max-width: 88%;
+  padding-left: 27px;
+}
+.gcf-dropdown-trigger:hover,
+.gcf-dropdown-trigger.gcf-dropdown-active {
+  background: rgba(255,255,255,0.08);
+  color: #e8eaed;
+}
+.gcf-dropdown-trigger .gcf-material-icon {
+  font-size: 16px;
+}
+
+.gcf-add-chat-outer {
+  position: relative;
+}
+
+.gcf-dropdown-panel {
+  display: none;
+  flex-direction: column;
+  background: #2d2e30;
+  border: 1px solid #3c3f41;
+  border-radius: 10px;
+  overflow-y: auto;
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 8px;
+  right: 8px;
+  max-height: 180px;
+  z-index: 9999;
+  scrollbar-width: thin;
+  scrollbar-color: #3c3f41 transparent;
+  animation: gcf-fade-in 0.12s ease;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+.gcf-dropdown-panel::-webkit-scrollbar { width: 4px; }
+.gcf-dropdown-panel::-webkit-scrollbar-thumb { background: #3c3f41; border-radius: 2px; }
+.gcf-dropdown-panel.gcf-dropdown-open { display: flex; }
+
+.gcf-dropdown-opt {
+  padding: 0 14px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  color: #e8eaed;
+  cursor: pointer;
+  transition: background 0.1s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: 'Google Sans', sans-serif;
+  flex-shrink: 0;
+}
+.gcf-dropdown-opt:hover { background: rgba(255,255,255,0.08); }
+
+.gcf-dropdown-empty {
+  padding: 10px 14px;
+  font-size: 12px;
+  color: #5f6368;
+  font-style: italic;
+  font-family: 'Google Sans', sans-serif;
+}
+ 
+/* ── Recents draggable ── */
+.gcf-recents-draggable { cursor: grab; }
+.gcf-recents-draggable:active { cursor: grabbing; }
+ 
+/* ── Divider ── */
+.gcf-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+  margin: 4px 0;
+}
+ 
+/* ── Icon & Color Picker Modal ── */
+#gcf-icon-picker {
+  background: #1e2022;
+  border: 1px solid #3c3f41;
+  border-radius: 16px;
+  padding: 20px;
+  width: 340px;
+  max-width: 95vw;
+  font-family: 'Google Sans', sans-serif;
+  color: #e8eaed;
+}
+ 
+.gcf-picker-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 14px;
+}
+ 
+.gcf-picker-label {
+  font-size: 11px;
+  color: #9aa0a6;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  display: block;
+}
+ 
+.gcf-picker-search {
+  width: 100%;
+  background: #2d2e30;
+  border: 1px solid #3c3f41;
+  border-radius: 8px;
+  color: #e8eaed;
+  font-size: 14px;
+  padding: 8px 12px;
+  margin-bottom: 10px;
+  outline: none;
+  box-sizing: border-box;
+  font-family: 'Google Sans', sans-serif;
+}
+.gcf-picker-search:focus { border-color: #8ab4f8; }
+ 
+.gcf-icon-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  max-height: 160px;
+  overflow-y: auto;
+  margin-bottom: 14px;
+  scrollbar-width: thin;
+  scrollbar-color: #3c3f41 transparent;
+}
+.gcf-icon-grid::-webkit-scrollbar { width: 4px; }
+.gcf-icon-grid::-webkit-scrollbar-thumb { background: #3c3f41; border-radius: 2px; }
+ 
+.gcf-icon-opt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: background 0.1s, border-color 0.1s;
+  font-family: 'Material Symbols Outlined' !important;
+  font-size: 20px;
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  user-select: none;
+}
+.gcf-icon-opt:hover { background: rgba(255,255,255,0.08); }
+.gcf-icon-opt.gcf-selected { border-color: #8ab4f8; background: rgba(138,180,248,0.12); }
+ 
+.gcf-color-grid {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.gcf-color-swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.1s, transform 0.1s;
+  flex-shrink: 0;
+}
+.gcf-color-swatch:hover { transform: scale(1.15); }
+.gcf-color-swatch.gcf-selected { border-color: #e8eaed; }
+ 
+.gcf-picker-name-input {
+  width: 100%;
+  background: #2d2e30;
+  border: 1px solid #3c3f41;
+  border-radius: 8px;
+  color: #e8eaed;
+  font-size: 14px;
+  padding: 8px 12px;
+  margin-bottom: 16px;
+  outline: none;
+  box-sizing: border-box;
+  font-family: 'Google Sans', sans-serif;
+}
+.gcf-picker-name-input:focus { border-color: #8ab4f8; }
+ 
+.gcf-picker-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.gcf-picker-btn {
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  font-family: 'Google Sans', sans-serif;
+  transition: background 0.15s, opacity 0.15s;
+}
+.gcf-picker-btn-cancel { background: #2d2e30; color: #e8eaed; }
+.gcf-picker-btn-cancel:hover { background: #3c3f41; }
+.gcf-picker-btn-save { background: #8ab4f8; color: #1e2022; }
+.gcf-picker-btn-save:hover { opacity: 0.88; }
